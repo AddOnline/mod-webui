@@ -536,7 +536,7 @@
                 </th>
 
                 <th style="font-size: small; font-weight: normal;" class="col-lg-4 hidden-md">
-                  %graphs = app.get_graph_uris(pb, now-4*3600, now, 'dashboard')
+                  %graphs = app.get_graph_uris(pb, now-4*3600, now, { 'source': 'dashboard' })
                   %onmouse_code = ''
                   %if len(graphs) > 0:
                     %onmouse_code = 'onmouseover="display_hover_img(\'%s\',\'\');" onmouseout="hide_hover_img();" ' % graphs[0]['img_src']

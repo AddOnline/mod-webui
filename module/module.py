@@ -96,7 +96,7 @@ class Webui_broker(BaseModule, Daemon):
 
         self.serveropts = {}
         umask = getattr(modconf, 'umask', None)
-        if umask != None: 
+        if umask != None:
             self.serveropts['umask'] = int(umask)
         bindAddress = getattr(modconf, 'bindAddress', None)
         if bindAddress:
@@ -133,7 +133,7 @@ class Webui_broker(BaseModule, Daemon):
         self.additional_plugins_dir = getattr(modconf, 'additional_plugins_dir', '')
         if self.additional_plugins_dir:
             self.additional_plugins_dir = os.path.abspath(self.additional_plugins_dir)
-        
+
         # We will save all widgets
         self.widgets = {}
         # We need our regenerator now (before main) so if we are in a scheduler,
@@ -141,8 +141,8 @@ class Webui_broker(BaseModule, Daemon):
         self.rg = Regenerator()
 
         self.bottle = bottle
-    
-    
+
+
     # We check if the photo directory exists. If not, try to create it
     def check_photo_dir(self):
         print "Checking photo path", self.photo_dir
@@ -208,7 +208,7 @@ class Webui_broker(BaseModule, Daemon):
         self.request = request
         self.response = response
         self.template_call = template
-        
+
         try:
             #import cProfile
             #cProfile.runctx('''self.do_main()''', globals(), locals(),'/tmp/webui.profile')
@@ -259,7 +259,7 @@ class Webui_broker(BaseModule, Daemon):
             if f and callable(f):
                 mod_plugins_path = os.path.abspath(f(self))
                 self.load_plugins(mod_plugins_path)
-                
+
 
         # Then look at the plugins in toe core and load all we can there
         core_plugin_dir = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'plugins')
@@ -299,7 +299,7 @@ class Webui_broker(BaseModule, Daemon):
         print "Data thread started"
 
 
-        
+
         while True:
             # DBG: t0 = time.time()
             # DBG: print "WEBUI :: GET START"
@@ -433,7 +433,7 @@ class Webui_broker(BaseModule, Daemon):
 
             except Exception, exp:
                 logger.warning("Loading WebUI plugin %s: %s" % (fdir, exp))
-        
+
 
 
 
@@ -446,7 +446,7 @@ class Webui_broker(BaseModule, Daemon):
         # Load plugin directories
         if not os.path.exists(plugin_dir):
             return
-        
+
         plugin_dirs = [fname for fname in os.listdir(plugin_dir)
                        if os.path.isdir(os.path.join(plugin_dir, fname))]
 
@@ -456,8 +456,8 @@ class Webui_broker(BaseModule, Daemon):
         # our type
         for fdir in plugin_dirs:
             self.load_plugin(fdir, plugin_dir)
-            
-    
+
+
 
     def add_static(self, fdir, m_dir):
         static_route = '/static/' + fdir + '/:path#.+#'
@@ -595,10 +595,10 @@ class Webui_broker(BaseModule, Daemon):
         # so we bail out if it's a false one
         user_name = self.request.get_cookie("user", secret=self.auth_secret)
 
-        # If we cannot check the cookie, bailout ... 
+        # If we cannot check the cookie, bailout ...
         if not allow_anonymous and not user_name:
             return None
-            
+
         # Allow anonymous access if requested and anonymous contact exists ...
         if allow_anonymous:
             c = self.datamgr.get_contact('anonymous')
@@ -612,9 +612,9 @@ class Webui_broker(BaseModule, Daemon):
 
 
     # Try to got for an element the graphs uris from modules
-    # The source variable describes the source of the calling. Are we displaying 
+    # The source variable describes the source of the calling. Are we displaying
     # graphs for the element detail page (detail), or a widget in the dashboard (dashboard) ?
-    def get_graph_uris(self, elt, graphstart, graphend, source = 'detail'):
+    def get_graph_uris(self, elt, graphstart, graphend, params = {}):
         #safe_print("Checking graph uris ", elt.get_full_name())
 
         uris = []
@@ -623,7 +623,7 @@ class Webui_broker(BaseModule, Daemon):
                 f = getattr(mod, 'get_graph_uris', None)
                 #safe_print("Get graph uris ", f, "from", mod.get_name())
                 if f and callable(f):
-                    r = f(elt, graphstart, graphend, source)
+                    r = f(elt, graphstart, graphend, params)
                     uris.extend(r)
             except Exception, exp:
                 print exp.__dict__
@@ -644,7 +644,7 @@ class Webui_broker(BaseModule, Daemon):
             url="data:image/png;base64,{0}".format(data)
             lk=''
         return (url,lk)
-        
+
     def get_common_preference(self, key, default=None):
         safe_print("Checking common preference for", key)
 
@@ -672,7 +672,7 @@ class Webui_broker(BaseModule, Daemon):
             if f and callable(f):
                 return True
         return False
-        
+
 
     # Try to got for an element the graphs uris from modules
     def get_user_preference(self, user, key, default=None):
@@ -712,7 +712,7 @@ class Webui_broker(BaseModule, Daemon):
                 logger.debug("Back trace of this kill: %s" % (traceback.format_exc()))
                 self.modules_manager.set_to_restart(mod)
 
-                
+
     def set_common_preference(self, key, value):
         safe_print("Saving common preference", key, value)
 

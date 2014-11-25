@@ -12,7 +12,7 @@
   <!-- Reduce the time range of the dashboard graph to last hour
    and specify the source as dashboard !
    -->
-  %uris = app.get_graph_uris(elt, now - duration, now, 'dashboard')
+  %uris = app.get_graph_uris(elt, now - duration, now, { 'source': 'dashboard'})
   %if len(uris) == 0:
     <span>No graph for this element</span>
   %else:

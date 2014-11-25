@@ -73,22 +73,22 @@ Invalid element name
 		if (navigator.appName == 'Microsoft Internet Explorer'){
 			$('#btn_show_gesture').hide();
 		}
-		
+
 		/* Look at the # part of the URI. If it match a nav name, go for it*/
 		if (window.location.hash.length > 0) {
       $('.nav-tabs a[href="' + window.location.hash + '"]').tab('show');
 		} else {
 			$('.nav-tabs a:first').tab('show');
 		}
-		
+
     // When a nav item is selected update the page hash
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
       window.location.hash = $(e.target).attr('href');
     })
-    
+
     // Buttons tooltips
     $('button').tooltip();
-    
+
     // Long text truncation
     $('.truncate_command').jTruncate({
       length: 200,
@@ -258,7 +258,7 @@ Invalid element name
             </h4>
           </div>
         </div>
-        
+
         <div id="collapseOverview" class="panel-collapse collapse">
           <div class="row">
             %if elt_type=='host':
@@ -272,7 +272,7 @@ Invalid element name
                 <dt>Importance:</dt>
                 <dd>{{!helper.get_business_impact_text(elt)}}</dd>
               </dl>
-              
+
               <dl class="col-lg-4 dl-horizontal">
                 <dt>Parents:</dt>
                 %if len(elt.parents) > 0:
@@ -324,7 +324,7 @@ Invalid element name
                 <dt>Importance:</dt>
                 <dd>{{!helper.get_business_impact_text(elt)}}</dd>
               </dl>
-              
+
               <dl class="col-lg-4 dl-horizontal">
                 <dt>Member of:</dt>
                 %if len(elt.servicegroups) > 0:
@@ -389,7 +389,7 @@ Invalid element name
     <div class="col-lg-2 hidden-md"></div>
   </div>
   %end
-  
+
 	<!-- Third row (bis) : business rule ... -->
   %if business_rule:
 	<div class="row" style="padding: 5px;">
@@ -408,7 +408,7 @@ Invalid element name
     <div class="col-lg-2 hidden-md"></div>
   </div>
   %end
-  
+
 	<!-- Fourth row : host/service -->
 	<div class="row" style="padding: 5px;">
 		<div class="col-md-6 col-lg-3 tabbable verticaltabs-container">
@@ -462,7 +462,7 @@ Invalid element name
 							</tr>
 						</tbody>
 					</table>
-							
+
 					<table class="table table-condensed col-sm-12" style="table-layout: fixed; word-wrap: break-word;">
 						<colgroup>
 							<col style="width: 40%" />
@@ -516,20 +516,20 @@ Invalid element name
 									{{'%.2f' % elt.latency}} / {{'%.2f' % elt.execution_time}} seconds
 								</td>
 							</tr>
-							
+
 							<tr>
 								<td colspan="2"><hr/></td>
 							</tr>
-							
+
 							<tr>
 								<td><strong>Last State Change:</strong></td>
 								<td>{{time.asctime(time.localtime(elt.last_state_change))}}</td>
 							</tr>
-							<tr>										
+							<tr>
 								<td><strong>Current Attempt:</strong></td>
 								<td>{{elt.attempt}}/{{elt.max_check_attempts}} ({{elt.state_type}} state)</td>
 							</tr>
-							<tr>		
+							<tr>
 								<td><strong>Next Active Check:</strong></td>
 								<td><span class="quickinfo" data-original-title='Next active check at {{time.asctime(time.localtime(elt.next_chk))}}'>{{helper.print_duration(elt.next_chk)}}</span></td>
 							</tr>
@@ -541,7 +541,7 @@ Invalid element name
 				%if params['tab_additional']=='yes':
 				<div class="tab-pane fade" id="additional">
 					<h4>Additional Informations</h4>
-					
+
 					<table class="table table-condensed col-sm-12" style="table-layout: fixed; word-wrap: break-word;">
 						<colgroup>
 							<col style="width: 40%" />
@@ -618,7 +618,7 @@ Invalid element name
 							</tr>
 						</tbody>
 					</table>
-          
+
 					<table class="table table-condensed col-sm-12" style="table-layout: fixed; word-wrap: break-word;">
 						<colgroup>
 							<col style="width: 40%" />
@@ -650,7 +650,7 @@ Invalid element name
               %end
 						</tbody>
 					</table>
-          
+
 					<table class="table table-condensed col-sm-12" style="table-layout: fixed; word-wrap: break-word;">
 						<colgroup>
 							<col style="width: 40%" />
@@ -724,7 +724,7 @@ Invalid element name
 									<button name="bt-add-comment" class="col-lg-12 {{disabled_s}} {{global_disabled}} btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Add a comment for this {{elt_type}}">Add a comment</button>
 								</td>
 							</tr>
-							
+
 							<tr>
 								<td></td>
 								<td>
@@ -737,7 +737,7 @@ Invalid element name
 									</script>
 								</td>
 							</tr>
-							
+
 							<tr>
                 %if elt.state != elt.ok_up and not elt.problem_has_been_acknowledged:
 								<td></td>
@@ -769,7 +769,7 @@ Invalid element name
 								</td>
                 %end
 							</tr>
-							
+
 							<tr>
 								<td></td>
 								<td>
@@ -782,7 +782,7 @@ Invalid element name
 									</script>
 								</td>
 							</tr>
-							
+
 							<tr>
 								<td></td>
 								<td>
@@ -801,7 +801,7 @@ Invalid element name
                 </script>
 							</td>
 							</tr>
-							
+
 							<!--
               <tr>
 								<td></td>
@@ -833,7 +833,7 @@ Invalid element name
 									</script>
 								</td>
 							</tr>
-							
+
 							<tr>
 								<td></td>
 								<td>
@@ -843,7 +843,7 @@ Invalid element name
 							</tr>
 						</tbody>
 					</table>
-							
+
 					<br/>
           <h4>Currently:</h4>
 					<table class="table-condensed col-sm-12" style="table-layout: fixed; word-wrap: break-word;">
@@ -888,7 +888,7 @@ Invalid element name
 									</script>
 								</td>
 							</tr>
-							
+
 							<tr>
 								<td><strong>Notifications:</strong></td>
 								<td>
@@ -1010,7 +1010,7 @@ Invalid element name
 				<li class="history_pane"><a class="link_to_tab" href="#history" data-toggle="tab" id="tab_to_history">History</a></li>
 				%end
 			</ul>
-			
+
 			<div class="tab-content">
 				<!-- Tab custom views -->
 				%if params['tab_custom_views']=='yes':
@@ -1032,7 +1032,7 @@ Invalid element name
 				%if params['tab_impacts']=='yes':
 				<div class="tab-pane fade {{_go_active}} {{_go_fadein}}" id="impacts">
 					<div class='row-fluid well col-lg-12'>
-					
+
 						<div class="row-fluid">
 							<div class="col-lg-12">
 								<!-- Show our father dependencies if we got some -->
@@ -1134,7 +1134,7 @@ Invalid element name
 							</div>
 							%end
 						</div>
-						
+
 						<button name="bt-add-comment" data-toggle="modal" data-target="#modal" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Add a comment</button>
 						<button name="bt-delete-comments" data-toggle="modal" data-target="#modal" class="btn btn-primary btn-sm"><i class="fa fa-minus"></i> Delete all comments</button>
             <script>
@@ -1194,7 +1194,7 @@ Invalid element name
 							</div>
 							%end
 						</div>
-						
+
 						<button name="bt-schedule-downtime" data-toggle="modal" data-target="#modal" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Add a downtime</button>
 						<button name="bt-delete-downtimes" data-toggle="modal" data-target="#modal" class="btn btn-primary btn-sm"><i class="fa fa-minus"></i> Delete all downtimes</button>
             <script>
@@ -1238,7 +1238,7 @@ Invalid element name
 				%if params['tab_graphs']=='yes':
 				<div class="tab-pane fade" id="graphs">
           %# Set source as '' or module ui-graphite will try to fetch templates from default 'detail'
-					%uris = app.get_graph_uris(elt, graphstart, graphend, '')
+					%uris = app.get_graph_uris(elt, graphstart, graphend)
 					%if len(uris) == 0:
 					<div class="alert alert-info">
 					    <div class="font-blue"><strong>Oh snap!</strong> No graphs available!</div>
@@ -1259,11 +1259,11 @@ Invalid element name
 
 						%# Let's get all the uris at once.
             %# Set source as '' or module ui-graphite will trye to fetch from default 'detail'
-						%uris_4h = app.get_graph_uris(elt, fourhours, now, '')
-						%uris_1d = app.get_graph_uris(elt, lastday, now, '')
-						%uris_1w = app.get_graph_uris(elt, lastweek, now, '')
-						%uris_1m = app.get_graph_uris(elt, lastmonth, now, '')
-						%uris_1y = app.get_graph_uris(elt, lastyear, now, '')
+						%uris_4h = app.get_graph_uris(elt, fourhours, now)
+						%uris_1d = app.get_graph_uris(elt, lastday, now)
+						%uris_1w = app.get_graph_uris(elt, lastweek, now)
+						%uris_1m = app.get_graph_uris(elt, lastmonth, now)
+						%uris_1y = app.get_graph_uris(elt, lastyear, now)
 
 						<!-- Use of javascript to change the content of a div!-->
 						<div class='col-lg-2 cursor'><a onclick="setHTML(html_4h,{{fourhours}});" > 4 hours</a></div>
@@ -1355,7 +1355,7 @@ Invalid element name
 								<a href="{{link}}" class="btn"><i class="fa fa-plus"></i> Show more</a>
 								<a href="javascript:graph_zoom('/{{elt_type}}/{{elt.get_full_name()}}?')" class="btn"><i class="icon-zoom-in"></i> Zoom</a>
 							</p>
-						%end      
+						%end
 						</div>
 					</div>
 					%end
@@ -1392,7 +1392,7 @@ Invalid element name
 				</div>
 				%end
 				<!-- Tab Dep graph End -->
-        
+
 				<!-- Tab History Start -->
 				%if params['tab_history']=='yes':
 				<div class="tab-pane fade" id="history">

@@ -266,6 +266,15 @@ def get_pbs_widget():
     # We want to limit the number of elements, The user will be able to increase it
     nb_elements = max(0, int(app.request.GET.get('nb_elements', '10')))
     search = app.request.GET.get('search', '')
+    business_impacts = app.request.GET.get('business_impacts', 'all')
+    business_impacts_list = {
+        'All':            'all',
+        'Very important': '5',
+        'High':           '4',
+        'Normal':         '3',
+        'Low':            '2',
+        'None':           '1',
+    }
 
     pbs = app.datamgr.get_all_problems(to_sort=False)
 
@@ -274,6 +283,14 @@ def get_pbs_widget():
 
     # Sort it now
     pbs.sort(hst_srv_sort)
+
+    # Filter on business impact
+    if business_impacts != 'all':
+        new_pbs = []
+        for p in pbs:
+            if p.business_impact == int(business_impacts):
+                new_pbs.append(p)
+        pbs=new_pbs
 
     # Ok, if need, appli the search filter
     if search:
@@ -304,9 +321,23 @@ def get_pbs_widget():
     wid = app.request.GET.get('wid', 'widget_problems_' + str(int(time.time())))
     collapsed = (app.request.GET.get('collapsed', 'False') == 'True')
 
-    options = {'search': {'value': search, 'type': 'text', 'label': 'Filter by name'},
-               'nb_elements': {'value': nb_elements, 'type': 'int', 'label': 'Max number of elements to show'},
-               }
+    options = {
+        'search': {
+            'value': search,
+            'type': 'text',
+            'label': 'Filter by name'
+        },
+        'business_impacts': {
+            'value': business_impacts,
+            'type': 'select',
+            'values': business_impacts_list
+        },
+        'nb_elements': {
+            'value': nb_elements,
+            'type': 'int',
+            'label': 'Max number of elements to show'
+        },
+    }
 
     title = 'IT problems'
     if search:
